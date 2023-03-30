@@ -3,15 +3,14 @@ const express = require('express');
 const router = express.Router();
 
 router.get("/register",(req, res)=>{
-    // res.status(200).json({
-    //     "message": "I am register page!",
-    //     statusCode: 200,
-    // });
-    res.redirect("/login");
+    res.statusCode = 200;
+    res.sendFile(__dirname + "../views/register.html");
 });
 
 router.get("/login",(req, res)=>{
-    res.send("I am login route!");
+    res.cookie("name","asif");
+    res.cookie("age","39");
+    res.end();
 });
 
 module.exports = router;
