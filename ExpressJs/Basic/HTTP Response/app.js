@@ -1,19 +1,23 @@
 //require module
 const express = require('express');
-const userRouts = require('./routes/user.routs');
-
 const app = express();
-app.use(userRouts);
+
+//const userRouts = require('./routes/user.routs');
 
 // transfer routs in app
-app.use("/api/user/",userRouts);
-
-app.use("/",(req, res)=>{
-    res.send("I am home route!");
-});
+//app.use(userRouts);
 
 app.use((req, res)=>{
     res.send("404 not found!");
-})
+});
+
+app.get("/",(req, res)=>{
+    res.sendFile('/views/idex.html', {root: __dirname });
+});
+
+app.get("/reg",(req, res)=>{
+    res.statusCode = 200;
+    res.sendFile('/views/index.html', {root: __dirname});
+});
 
 module.exports = app;
