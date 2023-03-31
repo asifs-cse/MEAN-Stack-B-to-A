@@ -10,11 +10,12 @@ app.get("/",(req, res)=>{
 });
 
 app.post('/login',(req, res)=>{
+    //get value
     let user = req.body.fast_name;
     let pass = req.body.last_name;
-    
-    console.log(user);
-    res.send(`<h1 style="text-align: center;">User name is : ${user}</h1><h1> User password is : ${pass}</h1>`);
+    //pass value
+    res.send(`<body style="background-color: rgb(94, 233, 191); text-align: center">
+    <h1>User name is : ${user}</h1><h1> User password is : ${pass}</h1></body>`);
 });
 
 app.listen(PORT, (req, res)=>{
