@@ -1,21 +1,20 @@
 const express = require('express');
-bodyParser = require('body-parser'); //middle ware
+const bodyParser = require('body-parser'); //middle ware
 const app = express();
+app.use(bodyParser());
 
 const PORT = 3031;
 
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-
 app.get("/",(req, res)=>{
-    //res.sendFile(path.join(__dirname, '../public', 'index.html'));
-    //res.sendFile('index.html', { root: path.join(__dirname, '../public') });
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile('/public/registration.html', {root: __dirname });
 });
 
-app.post("/login",(req, res)=>{
-    let user = req.body.user_name;
-    res.sendFile(__dirname + '/public/index.html');
+app.post('/login',(req, res)=>{
+    let user = req.body.fast_name;
+    let pass = req.body.last_name;
+    
+    console.log(user);
+    res.send(`<h1 style="text-align: center;">User name is : ${user}</h1><h1> User password is : ${pass}</h1>`);
 });
 
 app.listen(PORT, (req, res)=>{
