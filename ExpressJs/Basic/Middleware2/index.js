@@ -1,11 +1,9 @@
 const express = require('express');
-
 const app = express();
-
 const PORT = 4040;
 
 function isMorning(){
-    return true;
+    return false;
 };
 
 app.get('/', (req, res)=>{
@@ -18,17 +16,10 @@ app.get('/hello', (req, res, next) =>{
     }else{
         next();
     }
-}),(req, res, next)=>{
+}),
+function(req, res, next){
     res.send('Good Afternoon!');
 };
-
-app.get('/morning', (req, res)=>{
-    res.sendFile('/views/morning.html', {root: __dirname});
-});
-
-app.use((req, res)=>{
-    res.send("404 Nof found!");
-});
 
 app.listen(PORT, ()=>{
     console.log(`Server is open at http://localhost:${PORT}`);
