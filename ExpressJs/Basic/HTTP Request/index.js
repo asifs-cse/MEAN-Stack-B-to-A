@@ -7,6 +7,12 @@ app.get('/', (req, res)=>{
     res.send(`<h1>Student id is :${id}</h1>`);
 });
 
+app.get('/userId/:id/userAge/:age', (req, res)=>{
+    const id = req.params.id; //get value in route params
+    const age = req.params.age;
+
+    res.send(`<h1>User id is: ${id}, user age is: ${age}</h1>`);
+});
 
 app.listen(PORT, ()=>{
     console.log(`Server open at http://localhost:${PORT}`);
