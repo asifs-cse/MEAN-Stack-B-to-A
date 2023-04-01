@@ -20,6 +20,7 @@ app.get('/triangle', (req, res)=>{
     res.sendFile('triangle.html', {root: __dirname});
 });
 
+//calculate circle
 app.post('/circle', (req, res)=>{
     const radius = req.body.radius;
     const area = Math.PI *radius *radius;
@@ -27,6 +28,7 @@ app.post('/circle', (req, res)=>{
     res.send(`<h1>Area of Triangle is : ${area}</h1>`);
 });
 
+//calculate triangle
 app.post('/triangle', (req, res)=>{
     const height = req.body.height;
     const base = req.body.base;
@@ -35,6 +37,7 @@ app.post('/triangle', (req, res)=>{
     res.send(`<h1>Area of Triangle is : ${area}</h1>`);
 });
 
+//open server
 app.listen(PORT, (req, res)=>{
     console.log(`Server is open at http://localhost:${PORT}`);
 });
