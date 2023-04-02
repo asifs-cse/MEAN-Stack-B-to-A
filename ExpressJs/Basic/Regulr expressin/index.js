@@ -14,6 +14,10 @@ app.get('/products3/:id([a-zA-Z]{3})', (req, res)=>{ //get a to z  only three in
     res.send(`<h1>ID = ${req.params.id}</h1>`);
 });
 
+app.get('/products4/:id([a-zA-Z0-9]+)', (req, res)=>{ //get a to z  only three intiger number
+    res.send(`<h1>ID = ${req.params.id}</h1>`);
+});
+
 app.get('*', (req, res)=>{
     res.status(404).send({
         message: "not a valid route",
