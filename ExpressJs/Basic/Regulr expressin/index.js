@@ -6,6 +6,10 @@ app.get('/products/:id([0-9]+)', (req, res)=>{ //get o to 9any intiger number
     res.send(`<h1>ID = ${req.params.id}</h1>`);
 });
 
+app.get('/products2/:id([0-9]{3})', (req, res)=>{ //get o to 9any intiger number
+    res.send(`<h1>ID = ${req.params.id}</h1>`);
+});
+
 app.get('*', (req, res)=>{
     res.status(404).send({
         message: "not a valid route",
