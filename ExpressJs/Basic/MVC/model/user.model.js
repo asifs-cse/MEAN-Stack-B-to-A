@@ -7,5 +7,4 @@ const users =[
         age: 22
     }
 ];
-
 module.exports = users;

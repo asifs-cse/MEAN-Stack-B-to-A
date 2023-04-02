@@ -1,11 +1,12 @@
 const express = require('express');
 const userRouter = require('./routes/user.routs');
+const productRouter = require('./routes/product.routs');
 const app = express();
 
 const PORT = 4040;
 
 app.use(express.urlencoded({extended: true}));
-app.use(userRouter);
+app.use(userRouter, productRouter);
 
 app.get('/',(req, res)=>{
     res.send('This home page');
