@@ -8,10 +8,13 @@ const myMiddleWare = (req, res, next)=>{
     next();
 };
 
-
 app.get("/",myMiddleWare, (req, res)=>{
     console.log("Home route"+req.currentTime);
     res.send("<h1>I am home routes</h1>");
+});
+
+app.use((err, req, res, next)=>{
+    res.status(500).send('Something broke!');
 });
 
 app.listen(3000,()=>{
