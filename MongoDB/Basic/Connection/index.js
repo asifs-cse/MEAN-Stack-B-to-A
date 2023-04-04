@@ -13,6 +13,20 @@ const PORT = 3002;
 //     process.exit(1);
 // });
 
+//create porduct schema
+const productSchema = new mongoose.Schema({
+    title: String,
+    price: Number,
+    description: String,
+    createAd: {
+        type: Date,
+        default: Date.now
+    }
+});
+//create product model
+
+const product = mongoose.model("Products", productSchema);
+
 const dbConnect = async ()=>{
     try{
         mongoose.connect("mongodb://localhost:27017/testProductBD");
