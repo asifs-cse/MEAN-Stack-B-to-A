@@ -18,9 +18,22 @@ app.use(express.urlencoded({extended:true}));
 
 //create porduct schema
 const productSchema = new mongoose.Schema({
-    title: String,
-    price: Number,
-    description: String
+    title: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    createdAt: {
+        type: String,
+        default: Date.now,
+    }
 });
 //create product model
 
@@ -38,11 +51,26 @@ const dbConnect = async ()=>{
 };
 
 
-
 app.get('/',(req, res)=>{
     res.send('Welcome to home page');
 });
 
+//read data
+app.get('/products',async (req, res)=>{
+    try {
+        const products = await product.find();
+        if(products){
+            res.status(200).send(products);
+        }else{
+            res.status(404).send('Product not found!');
+        }
+        
+    } catch (error) {
+        res.status(500).send({message: error});
+    }
+});
+
+//CRUD -Cretae
 app.post('/products', async(req, res)=>{
     try{
         const title= req.body.title;
