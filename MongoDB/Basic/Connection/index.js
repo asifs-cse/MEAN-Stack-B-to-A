@@ -58,7 +58,7 @@ app.get('/',(req, res)=>{
 //read all data
 app.get('/products',async (req, res)=>{
     try {
-        const products = await productModel.find().limit(5);
+        const products = await productModel.find({price: {$gt: 100}}); //lessthen $lt, gratter then $gt not equal $neq 
         if(products){
             res.status(200).send(products);
         }else{
