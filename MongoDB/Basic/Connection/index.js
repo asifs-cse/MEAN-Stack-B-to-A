@@ -37,7 +37,7 @@ const productSchema = new mongoose.Schema({
 });
 //create product model
 
-const product = mongoose.model("Products", productSchema);
+const productModel = mongoose.model("Products", productSchema);
 
 const dbConnect = async ()=>{
     try{
@@ -55,12 +55,28 @@ app.get('/',(req, res)=>{
     res.send('Welcome to home page');
 });
 
-//read data
+//read all data
 app.get('/products',async (req, res)=>{
     try {
-        const products = await product.find();
+        const products = await productModel.find().limit(5);
         if(products){
             res.status(200).send(products);
+        }else{
+            res.status(404).send('Product not found!');
+        }
+        
+    } catch (error) {
+        res.status(500).send({message: error});
+    }
+});
+
+//read single  data
+app.get('/products/:id',async (req, res)=>{
+    try {
+        const id = req.params.id;
+        const product = await productModel.findOne({ _id: id}).select({title: 1, _id: 0});
+        if(product){
+            res.status(200).send(product);
         }else{
             res.status(404).send('Product not found!');
         }
