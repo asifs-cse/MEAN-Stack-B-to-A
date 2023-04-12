@@ -1,39 +1,24 @@
 const expresss = require('express');
 const mongoose = require('mongoose');
 const app = expresss();
-const PORT = 3002;
+const PORT = 3003;
+
+app.use(expresss.json());
+app.use(expresss.urlencoded({extended: true}));
 
 //create mongo schema
 const studentSchema= new mongoose.Schema({
-    name: {
-        type: String,
-        require: true
-    },
-    roll: {
-        type: String,
-        require: true
-    },
-    address: {
-        type: String,
-        require: true
-    },
-    result: {
-        type: String,
-        require: true
-    },
-    phone: {
-        type: Number,
-        require: true
-    }
+    name: String,
+    roll: String,
 })
 
 //create mongo model
-const studentModel = mongoose.model("student", studentSchema);
+const studentModel = mongoose.model("studentInfo", studentSchema);
 
 //connect mongodb
 const dbConnect = async ()=>{
     try {
-        await mongoose.connect("mongodb://localhost:27017/acoe");
+        await mongoose.connect("mongodb://127.0.0.1:27017/acoe");
         console.log('db is connected');
     } catch (error) {
         console.log('db is not connected');
@@ -48,14 +33,17 @@ app.get('/',(req, res)=>{
 });
 
 app.post('/register',async (req, res)=>{
-    const newStudent = new studentModel({
-        name : 'asif',
-        roll: '20mh1a0504',
-        address: 'peddapuram',
-        result: '3.80',
-        phone: 342758
-    });
-    const studentData = new studentModel.bulkSave();
+    try {
+        const newStudent = new studentModel({
+            name: 'asif',
+            roll: 'req.body.roll',
+        });
+        const showData = await newStudent.save();
+        console.log(showData);
+    } catch (error) {
+        
+    }
+    
 })
 
 
