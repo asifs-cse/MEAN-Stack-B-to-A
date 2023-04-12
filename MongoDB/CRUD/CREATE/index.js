@@ -43,6 +43,22 @@ const dbConnect = async ()=>{
 };
 
 
+app.get('/',(req, res)=>{
+    res.send("Welcome to home page!");
+});
+
+app.post('/register',async (req, res)=>{
+    const newStudent = new studentModel({
+        name : 'asif',
+        roll: '20mh1a0504',
+        address: 'peddapuram',
+        result: '3.80',
+        phone: 342758
+    });
+    const studentData = new studentModel.bulkSave();
+})
+
+
 app.listen(PORT, async ()=>{
     console.log(`Server is running at http://localhost:${PORT}`);
     await dbConnect();
