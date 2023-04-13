@@ -35,16 +35,26 @@ app.get('/register',async (req, res)=>{
             }
          );
          const updateData = await info.save();
-         console.log("Data updat successfully");
+         console.log("Data update successfully");
          res.send(updateData);
     } catch (error) {
-        console.log('data updte fail');
+        console.log('data update fail');
         console.log(error);
         res.send('404 not found')
         process.exit(1);
     }
     
 });
+
+//show data
+app.get('/show',async(req, res)=>{
+    try {
+        const stuInfo = await studentModel.find();
+        res.send(stuInfo);
+    } catch (error) {
+        res.send('404 not found!');
+    }
+})
 
 //create home route
 app.get('/',(req, res)=>{
