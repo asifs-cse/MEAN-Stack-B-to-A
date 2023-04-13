@@ -3,6 +3,54 @@ const mongooe = require('mongoose');
 const app = express();
 const PORT = 3031;
 
+//create db Schema
+const studentSchema = new mongooe.Schema({
+    id: {
+        type: Number,
+        required: true
+    },name: {
+        type: String,
+        required: true
+    },roll: {
+        type: String,
+        required: true
+    },phone: {
+        type: Number,
+        required: true
+    }
+});
+
+//create student db model
+const studentModel = new mongooe.model("studentInfo", studentSchema);
+
+//inser daata in db
+app.get('/register',async (req, res)=>{
+    try {
+        const info = new studentModel(
+            {
+             id: 123,
+             name: "asif",
+             roll: "20mh1a0504",
+             phone: 01234
+            }
+         );
+         const updateData = await info.save();
+         console.log("Data updat successfully");
+         res.send(updateData);
+    } catch (error) {
+        console.log('data updte fail');
+        console.log(error);
+        res.send('404 not found')
+        process.exit(1);
+    }
+    
+});
+
+//create home route
+app.get('/',(req, res)=>{
+    res.send('Welcome to home route');
+})
+
 //connect mongodb in express server
 const dbConnect = async ()=>{
     try {
@@ -10,11 +58,11 @@ const dbConnect = async ()=>{
         console.log('Database onnection successfully!');
     } catch (error) {
         console.log('Database conection failed');
-        console.log(error.message());
+        console.log(error);
         process.exit(1);
     }
     
-}
+};
 
 //create express server
 app.listen(PORT, ()=>{
