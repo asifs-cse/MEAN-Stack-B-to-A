@@ -53,13 +53,33 @@ app.get('/show',async(req, res)=>{
         res.send(stuInfo);
     } catch (error) {
         res.send('404 not found!');
+        process.exit(1);
     }
-})
+});
+
+app.get('/update', async (req, res)=>{
+    try {
+        //const id = "643791716329f96c52febe0d";
+        const id = 123;
+        await studentModel.updateOne({id: id},{
+            $set: {
+                name: 'riya rahman',
+            }
+        });
+        const stuInfo = await studentModel.find();
+        res.send(stuInfo);
+        console.log('data update success');
+        process.exit(1);
+    } catch (error) {
+        console.log('update failed');
+        process.exit(1);
+    }
+});
 
 //create home route
 app.get('/',(req, res)=>{
     res.send('Welcome to home route');
-})
+});
 
 //connect mongodb in express server
 const dbConnect = async ()=>{
