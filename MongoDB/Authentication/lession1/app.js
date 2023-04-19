@@ -38,8 +38,18 @@ app.post("/register",async (req, res)=>{
 });
 
 //register route
-app.get("/login",(req, res)=>{
-    res.status(201).json({message: "user is login"});
+app.post("/login",async (req, res)=>{
+    try {
+        const {email, password} = req.body;
+        const user = await User.findOne({email:email});
+        if(user && user.password == password){
+            res.status(200).json({status: 'valid user'});
+        }else{
+            res.status(200).json({status: 'not valid user'});
+        }
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
 });
 
 //rout not found
