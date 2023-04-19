@@ -7,6 +7,7 @@ const PORT = 4000;
 const dbUrl = process.env.MONGO_URL;
 const User = require("./models/user.model");
 
+
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
