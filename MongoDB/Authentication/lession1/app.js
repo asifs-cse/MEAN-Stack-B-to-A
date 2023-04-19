@@ -5,6 +5,7 @@ const app = express();
 const mongoose = require('mongoose');
 const PORT = 4000;
 const dbUrl = process.env.MONGO_URL;
+const User = require("./models/user.model");
 
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
@@ -26,9 +27,14 @@ app.get("/",(req, res)=>{
 });
 
 //register route
-app.get("/register",(req, res)=>{
-    const {email, password} = req.body;
-    res.status(201).json({email, password});
+app.post("/register",async (req, res)=>{
+    try {
+        const newUser = new User(req.body);
+        await newUser.save();
+        res.status(200).json(newUser);
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
 });
 
 //register route
