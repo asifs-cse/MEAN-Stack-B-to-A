@@ -37,9 +37,14 @@ app.post('/signup', async (req,res)=>{
 
 app.post('/login', async (req,res)=>{
     try {
-        
+        const check = await infoModel.findOne({email:req.body.user_email});
+        if(check.password == req.body.user_password){
+            res.render("home");
+        }else{
+            res.send('wrong password');
+        }
     } catch (error) {
-        
+        res.send('user not registerd');
     }
 })
 
