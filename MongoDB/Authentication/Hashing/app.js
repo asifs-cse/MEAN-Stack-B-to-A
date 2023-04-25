@@ -46,7 +46,8 @@ app.post("/register",async (req, res)=>{
 //register route
 app.post("/login",async (req, res)=>{
     try {
-        const {email, password} = req.body;
+        const email = req.body.email;
+        const password = md5(req.body.email);
         const user = await User.findOne({email:email});
         if(user && user.password == password){
             res.status(200).json({status: 'Login success'});
