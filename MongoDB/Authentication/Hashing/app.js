@@ -1,3 +1,4 @@
+//hashing password
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -6,6 +7,7 @@ const mongoose = require('mongoose');
 const PORT = 4000;
 const dbUrl = process.env.MONGO_URL;
 const User = require("./models/user.model");
+const md5 = require('md5');
 
 
 app.use(cors());
@@ -30,7 +32,10 @@ app.get("/",(req, res)=>{
 //register route
 app.post("/register",async (req, res)=>{
     try {
-        const newUser = new User(req.body);
+        const newUser = new User({
+            email: req.body.email,
+            password: md5(req.body.password)
+        });
         await newUser.save();
         res.status(200).json(newUser);
     } catch (error) {
