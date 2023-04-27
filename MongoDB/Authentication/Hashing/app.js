@@ -1,4 +1,4 @@
-//hashing password
+//hashing password + salting password
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -7,7 +7,12 @@ const mongoose = require('mongoose');
 const PORT = 4000;
 const dbUrl = process.env.MONGO_URL;
 const User = require("./models/user.model");
-const md5 = require('md5');
+//hashing
+//const md5 = require('md5');
+
+//salting
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 
 app.use(cors());
@@ -32,12 +37,15 @@ app.get("/",(req, res)=>{
 //register route
 app.post("/register",async (req, res)=>{
     try {
-        const newUser = new User({
-            email: req.body.email,
-            password: md5(req.body.password)
-        });
-        await newUser.save();
-        res.status(200).json(newUser);
+        //using salting
+        bcrypt.hash(req.body.password, saltRounds, async function (err, hash){
+            const newUser = new User({
+                email: req.body.email,
+                password: hash,
+            });
+            await newUser.save();
+            res.status(200).json(newUser);
+        })
     } catch (error) {
         res.status(500).json(error.message);
     }
@@ -47,10 +55,14 @@ app.post("/register",async (req, res)=>{
 app.post("/login",async (req, res)=>{
     try {
         const email = req.body.email;
-        const password = md5(req.body.email);
+        //const password = req.body.email;
         const user = await User.findOne({email:email});
-        if(user && user.password == password){
-            res.status(200).json({status: 'Login success'});
+        if(user){
+            bcrypt.compare(req.body.password, has, function(err, result){
+                if(result == true){
+                    res.status(200).json({status: 'Login success'});
+                }
+            })
         }else{
             res.status(200).json({status: 'Incorrect username or password!'});
         }
