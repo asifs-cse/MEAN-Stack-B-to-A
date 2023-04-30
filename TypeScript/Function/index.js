@@ -9,8 +9,9 @@ console.log(x);
 //void type
 function msg() {
     console.log('Hello world');
-}
-;
+};
+
+//call method
 msg();
 //get value and return
 function mul(x, y) {
