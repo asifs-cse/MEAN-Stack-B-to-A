@@ -33,7 +33,8 @@ const productSchema = new mongoose.Schema({
     createdAt: {
         type: String,
         default: Date.now,
-    }
+    },
+
 });
 //create product model
 

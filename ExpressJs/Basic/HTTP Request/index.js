@@ -17,6 +17,7 @@ app.get('/userId/:id/userAge/:age', (req, res)=>{
     res.send(`<h1>User id is: ${id}, user age is: ${age}</h1>`);
 });
 
+//get value using header
 app.get('/header', (req, res)=>{
     const id = req.header('id'); //get value in route params
     const age = req.header('age');
@@ -24,7 +25,6 @@ app.get('/header', (req, res)=>{
     res.send(`<h1>User id is: ${id}, user age is: ${age}</h1>`);
 });
 
-//get value using header
 
 
 

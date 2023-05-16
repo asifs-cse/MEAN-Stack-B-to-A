@@ -1,3 +1,5 @@
+
+//functiion
 function getProductDetails(cse) {
     return 'the product name is: ' + cse.productName + 'product id:' + cse.productId;
 }

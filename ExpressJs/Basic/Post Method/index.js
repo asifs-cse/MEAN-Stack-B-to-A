@@ -13,9 +13,11 @@ app.post('/login',(req, res)=>{
     //get value
     let user = req.body.fast_name;
     let pass = req.body.last_name;
+    let gmail = req.body.user_gmail;
     //pass value
     res.send(`<body style="background-color: rgb(94, 233, 191); text-align: center">
-    <h1>User name is : ${user}</h1><h1> User password is : ${pass}</h1></body>`);
+    <h1>User name is : ${user}</h1><h1> User password is : ${pass}</h1>
+    <h1> User email is : ${gmail}</h1></body>`);
 });
 
 app.listen(PORT, (req, res)=>{

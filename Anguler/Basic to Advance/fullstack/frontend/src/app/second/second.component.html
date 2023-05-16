@@ -1,1 +1,9 @@
 <p>second works!</p>
+<label for="color">
+    <input type="text" [formControl]="color">
+</label>
+
+<p>
+    {{color.value}}
+</p>
+<a [routerLink]="['/']" routerLinkActive="router-link-active" >Go to firt Route</a>

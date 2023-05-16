@@ -47,9 +47,7 @@ app.get('/show', async (req, res)=>{
     }catch(err){
         res.send(err);
     }
-
-
-})
+});
 
 app.listen(PORT,async (req, res)=>{
     console.log(`Server is open at http://localhost:${PORT}`);

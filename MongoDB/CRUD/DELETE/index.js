@@ -53,4 +53,4 @@ app.get('/remove', async (req, res)=>{
 app.listen(PORT, async (req, res)=>{
     console.log(`Server is open at http://localhost:${PORT}`);
     await dbConnect();
-})
+});

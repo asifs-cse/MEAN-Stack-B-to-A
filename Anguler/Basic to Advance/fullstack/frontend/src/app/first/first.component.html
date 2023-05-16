@@ -8,3 +8,14 @@
     </li>
 </ul>
 <p>{{message()}}</p>
+<nav>
+    <ul>
+        <li>
+            <a [routerLink]="['/fa-a']" routerLinkActive="router-link-active" >Child A</a>
+            <br>
+            <a [routerLink]="['/fa-b']" routerLinkActive="router-link-active" >Child B</a>
+        </li>
+    </ul>
+</nav>
+<a [routerLink]="['/s']" routerLinkActive="router-link-active" >Go to Second components</a>
+<router-outlet></router-outlet>
